@@ -2,13 +2,15 @@
 namespace Controller;
 
 use Model\PageRepository;
-
+use Model\VideoRepository;
 class PageControllers
 {
     private $repository;
+    private $video;
     public function __construct(\PDO $PDO)
     {
         $this->repository = new PageRepository($PDO);
+        $this->video = new VideoRepository($PDO);
     }
 
     public function route(){
@@ -24,8 +26,35 @@ class PageControllers
             break;
 
             case 'micro':
-                $this->uploadFile();
+                // Uploader un fichier
+                // Envoyer ce fichier sur l'id_file
+                if(isset($_GET['num'])) {
+                    $number = $_GET['num'];
+                    $data = $this->repository->selectId($number);
+                    if (!$data) {
+                        include "Views/page404.php";
+                        return;
+                    }
+                    $this->uploadFile($data);
+                    $this->getScript(0);
+                }
+            break;
+
+            case 'monde':
+                $this->listeAction();
                 $this->getScript(0);
+            break;
+
+            case 'profil':
+                if(isset($_GET['num'])) {
+                    $number = $_GET['num'];
+                    $data = $this->repository->selectId($number);
+                    if(!$data){
+                        include "Views/page404.php";
+                        return;
+                    }
+                    include 'Views/profil.php';
+                }
             break;
 
             default:
@@ -53,22 +82,29 @@ class PageControllers
         include 'Views/footer/foot.php';
     }
 
-    public function uploadFile(){
+    public function listeAction(){
+        $users = $this->repository->selectAllUsers();
+        include 'Views/monde.php';
+    }
+
+    public function uploadFile($data){
         if(count($_FILES) === 0) {
             include 'Views/micro.php';
         }else{
             if(!empty($_FILES)){
+                var_dump($_FILES);
                 $file_name = $_FILES['fichier']['name'];
                 $file_extension = strrchr($file_name, ".");
                 $extensions_autorisee = ['.mp4', '.MP4'];
                 $file_tmp = $_FILES['fichier']['tmp_name'];
-                $file_dest =  $file_name;
+                $file_dest =  'assets/video/' . $file_name;
+                echo uniqid();
                 if(in_array($file_extension, $extensions_autorisee)){
                     // Il rentre dans le dossier assets/video puis il va ajouter le nom du fichier
                     // Le fichier temporaire sera mis dans le dossier
-                    if(move_uploaded_file($file_tmp, 'assets/video/' . $file_dest)){
+                    if(move_uploaded_file($file_tmp, $file_dest)){
                         echo 'Fichier envoyé avec succès';
-                        $this->repository->insertUploadedFile($file_name, $file_dest);
+                        $this->video->insertUploadedFile($file_name, $file_dest);
                     }else{
                         echo "Une erreur est survenue lors de l'envoi";
                     }
@@ -76,6 +112,7 @@ class PageControllers
                     echo 'Seul les fichiers mp4 sont autorisées';
                 }
             }
+            header( 'Location: index.php?route=monde' );
         }
     }
 
