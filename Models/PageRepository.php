@@ -36,4 +36,24 @@ class PageRepository
         ON 
         users.id = video.id_poste;";
     }
+
+    public function selectId($id){
+        $sql = "
+        SELECT 
+          `id`,
+          `nom`,
+          `prenom`, 
+          `pseudo`,
+          `password`,
+          `email`
+        FROM 
+          `users` 
+        WHERE 
+          `id` = :id
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
 }

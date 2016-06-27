@@ -26,19 +26,34 @@ class PageControllers
             break;
 
             case 'micro':
-                $this->uploadFile();
-                $this->getScript(0);
+                // Uploader un fichier
+                // Envoyer ce fichier sur l'id_file
+                if(isset($_GET['num'])) {
+                    $number = $_GET['num'];
+                    $data = $this->repository->selectId($number);
+                    if (!$data) {
+                        include "Views/page404.php";
+                        return;
+                    }
+                    $this->uploadFile($data);
+                    $this->getScript(0);
+                }
             break;
 
             case 'monde':
                 $this->listeAction();
+                $this->getScript(0);
             break;
 
             case 'profil':
-                if(isset($_GET['num']) && is_int($_GET['num'])){
+                if(isset($_GET['num'])) {
                     $number = $_GET['num'];
-                }else{
-                    include 'Views/page404.php';
+                    $data = $this->repository->selectId($number);
+                    if(!$data){
+                        include "Views/page404.php";
+                        return;
+                    }
+                    include 'Views/profil.php';
                 }
             break;
 
@@ -72,7 +87,7 @@ class PageControllers
         include 'Views/monde.php';
     }
 
-    public function uploadFile(){
+    public function uploadFile($data){
         if(count($_FILES) === 0) {
             include 'Views/micro.php';
         }else{
@@ -97,6 +112,7 @@ class PageControllers
                     echo 'Seul les fichiers mp4 sont autorisées';
                 }
             }
+            header( 'Location: index.php?route=monde' );
         }
     }
 
