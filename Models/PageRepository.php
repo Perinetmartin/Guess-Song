@@ -7,16 +7,33 @@ class PageRepository
     {
         $this->PDO = $PDO;
     }
-    
-    function insertUploadedFile($name, $fileUrl){
-        $sql = "INSERT INTO
-                `video`
-                (`file`, `file_url`) 
-                VALUES
-                (:file, :file_url)";
+
+    public function selectAllUsers(){
+        $sql = "
+        SELECT 
+          `id`, 
+          `nom`, 
+          `prenom`, 
+          `pseudo`, 
+          `password`, 
+          `email`
+        FROM 
+          `users` 
+        ";
         $stmt = $this->PDO->prepare($sql);
-        $stmt->bindValue(':file', $name);
-        $stmt->bindValue(':file_url', $fileUrl);
         $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function selectVideobyId(){
+        $sql = "
+        SELECT 
+        * 
+        FROM 
+        users 
+        INNER JOIN 
+        video 
+        ON 
+        users.id = video.id_poste;";
     }
 }
