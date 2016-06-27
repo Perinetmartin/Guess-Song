@@ -1,0 +1,16 @@
+{
+    "name": "danie/microphonejs",
+    "authors": [
+        {
+            "name": "Daniel Dupont",
+            "email": "danieldd.leinad@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4":
+            {
+                "Controller\\": "Controllers/",
+                "Model\\": "Models/"
+            }
+    }
+}
