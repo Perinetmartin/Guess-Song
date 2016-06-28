@@ -9,7 +9,7 @@ class VideoRepository
         $this->PDO = $PDO;
     }
 
-    function insertUploadedFile($name, $fileUrl)
+    public function insertUploadedFile($name, $fileUrl)
     {
         $sql = "INSERT INTO
                 `video`
@@ -22,4 +22,112 @@ class VideoRepository
         $stmt->bindValue(':id_file', $_POST['id_file']);
         $stmt->execute();
     }
+
+    public function selectVideoById($id){
+        $sql = "
+        SELECT 
+          `id`,
+          `file`,
+        FROM 
+          `video` 
+        WHERE 
+          `id` = :id
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
+
+    public function selectAllVideo(){
+        $sql = "
+        SELECT 
+          `id`, 
+          `file`, 
+          `file_url`
+        FROM 
+          `video` 
+        ORDER BY id DESC
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function listerVideo(){
+        $sql = "SELECT 
+        id,
+        file,
+        file_url,
+        difference_like
+        FROM
+        video
+        ORDER BY difference_like DESC
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    public function like()
+    {
+        $sql= "UPDATE 
+                `users`
+              SET 
+                `like_count` = 	like_count + 1,
+                `difference_like` = difference_like + 1
+              WHERE 
+                `id` = :id
+            ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $_GET['id'],\PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
+
+    public function dislike()
+    {
+        $sql= "UPDATE 
+                `users`
+              SET 
+                `dislike_count` = 	dislike_count + 1,
+                `difference_like` = difference_like - 1
+              WHERE 
+                `id` = :id
+            ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $_GET['id'],\PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }
+
+    public function videoLauncher($id){
+        $sql = " 
+            SELECT 
+            * 
+            FROM users
+            INNER JOIN video
+            ON users.id = video.id_file
+            WHERE video.id = :id";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
+
+
+
+//    public function differencelike(){
+////        $this->selectVideoById($id);
+//        $sql = "UPDATE
+//        `video`
+//        SET 
+//          `difference_like` = like_count - dislike_count
+//        WHERE
+//          `id` = :id
+//        ";
+//        $stmt = $this->PDO->prepare($sql);
+//        $stmt->bindParam(':id', $_POST['id_file']);
+//        $stmt->execute();
+//    }
 }

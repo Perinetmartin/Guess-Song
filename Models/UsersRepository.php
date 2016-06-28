@@ -25,18 +25,6 @@ class UsersRepository
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-//    public function selectVideobyId(){
-//        $sql = "
-//        SELECT 
-//        * 
-//        FROM 
-//        users 
-//        INNER JOIN 
-//        video 
-//        ON 
-//        users.id = video.id_poste;";
-//    }
-
     public function selectId($id){
         $sql = "
         SELECT 
