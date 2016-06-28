@@ -20,7 +20,6 @@ class VideoControllers
         // On passe la variable $data
         // Cette variable correspond à $data = $this->repositoryUsers->selectId($number);
         // Dans le frontController
-
         if (count($_FILES) === 0) {
             include 'Views/micro.php';
         } else {
@@ -34,6 +33,9 @@ class VideoControllers
                 // Les extensions autorisées sont mp4 ou MP4
                 $extensions_autorisee = ['.mp4', '.MP4'];
 
+                // On récupère le poid du fichier
+                $size = $_FILES['fichier']['size'];
+
                 // La répertoire temporaire stockée dans une variable
                 $file_tmp = $_FILES['fichier']['tmp_name'];
 
@@ -41,7 +43,7 @@ class VideoControllers
                 $file_dest = 'assets/video/' . $file_name;
 
                 // Si l'extension envoyés par le fichier fait parti de l'extension autorisées
-                if (in_array($file_extension, $extensions_autorisee)) {
+                if (in_array($file_extension, $extensions_autorisee) && $size <= 5000000) {
                     // Le fichier temporaire sera mis dans le dossier de destination
                     if (move_uploaded_file($file_tmp, $file_dest)) {
                         echo 'Fichier envoyé avec succès';
