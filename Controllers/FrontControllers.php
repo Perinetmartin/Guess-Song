@@ -18,6 +18,7 @@ class FrontControllers
     }
     
     public function route(){
+        $this->getHeader();
         if(isset($_GET['route'])){
             $currentRoute = $_GET['route'];
         }else{
@@ -73,10 +74,18 @@ class FrontControllers
                 $this->users->login();
             break;
 
+            case 'disconnect':
+                include 'Views/auth/session.php';
+            break;
+
             default:
                 include 'Views/home.php';
                 $this->getScript();
         }
+    }
+
+    public function getHeader(){
+        include "Views/header/header.php";
     }
 
     public function getScript(){
