@@ -17,8 +17,8 @@ class VideoRepository
                 VALUES
                 (:file, :file_url, :id_file)";
         $stmt = $this->PDO->prepare($sql);
-        $stmt->bindValue(':file', uniqid() . $name);
-        $stmt->bindValue(':file_url', uniqid() . $fileUrl);
+        $stmt->bindValue(':file', $name);
+        $stmt->bindValue(':file_url', $fileUrl);
         $stmt->bindValue(':id_file', $_POST['id_file']);
         $stmt->execute();
     }
