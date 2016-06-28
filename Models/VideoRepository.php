@@ -39,6 +39,21 @@ class VideoRepository
         return $stmt->fetchObject();
     }
 
+    public function selectAllVideo(){
+        $sql = "
+        SELECT 
+          `id`, 
+          `file`, 
+          `file_url`
+        FROM 
+          `video` 
+        ORDER BY id DESC
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     public function listerVideo(){
         $sql = "SELECT 
         id,
@@ -69,6 +84,7 @@ class VideoRepository
         $stmt->execute();
         return true;
     }
+
     public function dislike()
     {
         $sql= "UPDATE 
@@ -84,7 +100,23 @@ class VideoRepository
         $stmt->execute();
         return true;
     }
-    
+
+    public function videoLauncher($id){
+        $sql = " 
+            SELECT 
+            * 
+            FROM users
+            INNER JOIN video
+            ON users.id = video.id_file
+            WHERE video.id = :id";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
+
+
+
 //    public function differencelike(){
 ////        $this->selectVideoById($id);
 //        $sql = "UPDATE

@@ -34,6 +34,21 @@ class FrontControllers
                 include "Views/top.php";
             break;
 
+            case 'post':
+                if(isset($_GET['id'])){
+                    $currentId = $_GET['id'];
+                    $data = $this->repositoryVideo->videoLauncher($currentId);
+                    include 'Views/post.php';
+                }else{
+                    include 'Views/page404.php';
+                }
+            break;
+            
+            case 'shots':
+                $data = $this->repositoryVideo->selectAllVideo();
+                include 'Views/shots.php';
+            break;
+
             case 'micro':
                 // Uploader un fichier
                 // Envoyer ce fichier sur l'id_file
