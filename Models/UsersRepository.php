@@ -44,4 +44,19 @@ class UsersRepository
         $stmt->execute();
         return $stmt->fetchObject();
     }
+
+    public function insertUser(){
+        $sql = "INSERT INTO
+                users
+                (nom, prenom, pseudo, password, email) 
+                VALUES 
+                (:nom, :prenom, :pseudo, :password, :email)";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindValue(':nom', $_POST['nom']);
+        $stmt->bindValue(':prenom', $_POST['prenom']);
+        $stmt->bindValue(':pseudo', $_POST['pseudo']);
+        $stmt->bindValue(':password', password_hash($_POST['password'], PASSWORD_DEFAULT));
+        $stmt->bindValue(':email', $_POST['email']);
+        $stmt->execute();
+    }
 }
