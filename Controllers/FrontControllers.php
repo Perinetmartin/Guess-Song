@@ -65,21 +65,12 @@ class FrontControllers
                 }
             break;
 
-            case 'monde':
-                $this->users->listeAction();
-                $this->getScript();
+            case 'register':
+                $this->users->register();
             break;
-
-            case 'profil':
-                if(isset($_GET['num'])) {
-                    $number = $_GET['num'];
-                    $data = $this->repositoryUsers->selectId($number);
-                    if(!$data){
-                        include "Views/page404.php";
-                        return;
-                    }
-                    include 'Views/profil.php';
-                }
+            
+            case 'login':
+                $this->users->login();
             break;
 
             default:

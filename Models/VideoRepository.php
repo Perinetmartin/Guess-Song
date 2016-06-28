@@ -114,20 +114,4 @@ class VideoRepository
         $stmt->execute();
         return $stmt->fetchObject();
     }
-
-
-
-//    public function differencelike(){
-////        $this->selectVideoById($id);
-//        $sql = "UPDATE
-//        `video`
-//        SET 
-//          `difference_like` = like_count - dislike_count
-//        WHERE
-//          `id` = :id
-//        ";
-//        $stmt = $this->PDO->prepare($sql);
-//        $stmt->bindParam(':id', $_POST['id_file']);
-//        $stmt->execute();
-//    }
 }
