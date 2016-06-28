@@ -29,6 +29,11 @@ class FrontControllers
                 $this->getScript();
             break;
 
+            case 'top':
+                $data = $this->repositoryVideo->listerVideo();
+                include "Views/top.php";
+            break;
+
             case 'micro':
                 // Uploader un fichier
                 // Envoyer ce fichier sur l'id_file
