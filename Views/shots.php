@@ -2,7 +2,7 @@
     foreach ($data as $item) {
 ?>
     <p><?= $item->id ?></p>
-    <video src="<?= $item->file_url ?>" width="400" autoplay></video>
+    <a href="index.php?route=post&id=<?= $item->id ?>"><video src="<?= $item->file_url ?>" width="400" autoplay muted></video></a>
     <br/>
 <?php
     }

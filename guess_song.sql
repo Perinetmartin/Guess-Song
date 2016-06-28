@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mar 28 Juin 2016 à 15:51
+-- Généré le :  Mar 28 Juin 2016 à 20:33
 -- Version du serveur :  5.7.9
 -- Version de PHP :  5.6.16
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Contenu de la table `users`
@@ -46,7 +46,8 @@ INSERT INTO `users` (`id`, `nom`, `prenom`, `pseudo`, `password`, `email`) VALUE
 (2, 'Dupont', 'Daniel', 'Leinad93160', 'azerty', 't806@gmail.com'),
 (3, 'Jean', 'Alain', 'jean63', '63', 'ok@gmail.com'),
 (4, 'Dark', 'Vador', 'Vador45', 'hello', 'hello@gmail.com'),
-(5, 'Clement', 'Lolo', 'IonicMan', 'io', 'IonicMan@gmail.com');
+(5, 'Clement', 'Lolo', 'IonicMan', 'io', 'IonicMan@gmail.com'),
+(6, 'toto', 'tata', 'toto93', '$2y$10$dmsWd75BdO1kBT7vLRWZCerfgUuXNqJHOvKPVr2KFKU6neDaAXR92', 'toto93@gmail.com');
 
 -- --------------------------------------------------------
 

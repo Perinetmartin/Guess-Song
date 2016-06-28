@@ -88,10 +88,17 @@ class UsersControllers
 
             $data = $this->users->selectAllUsers();
             foreach ($data as $item) {
+                var_dump($item);
                 if($pseudo === $item->pseudo && password_verify($password, $item->password)){
                     echo "That's great ! You are now loged in";
+//                    session_start();
+                    $_SESSION['pseudo'] = $item->pseudo;
+                    $_SESSION['nom'] = $item->nom;
+                    $_SESSION['prenom'] = $item->prenom;
+//                    $_SESSION['pseudo'] = $item->pseudo;
                     return;
                 }
+                header('Location: index.php');
             }
             echo 'The username or password are wrong';
         }
