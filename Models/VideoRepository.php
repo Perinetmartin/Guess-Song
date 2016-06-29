@@ -13,13 +13,13 @@ class VideoRepository
     {
         $sql = "INSERT INTO
                 `video`
-                (`file`, `file_url`, `id_file`) 
+                (`file`, `file_url`, `id_user`) 
                 VALUES
-                (:file, :file_url, :id_file)";
+                (:file, :file_url, :id_user)";
         $stmt = $this->PDO->prepare($sql);
         $stmt->bindValue(':file', $name);
         $stmt->bindValue(':file_url', $fileUrl);
-        $stmt->bindValue(':id_file', $_POST['id_file']);
+        $stmt->bindValue(':id_user', $_POST['id_user']);
         $stmt->execute();
     }
 
@@ -27,7 +27,7 @@ class VideoRepository
         $sql = "
         SELECT 
           `id`,
-          `file`,
+          `file`
         FROM 
           `video` 
         WHERE 
@@ -35,6 +35,22 @@ class VideoRepository
         ";
         $stmt = $this->PDO->prepare($sql);
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
+
+    public function selectVideoById_file(){
+        $sql = "
+        SELECT 
+          `id`,
+          `id_user`
+        FROM 
+          `video` 
+        WHERE 
+          `id` = :id
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $_GET['id']);
         $stmt->execute();
         return $stmt->fetchObject();
     }
@@ -69,10 +85,10 @@ class VideoRepository
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function like()
+    public function like($currentId)
     {
         $sql= "UPDATE 
-                `users`
+                `video`
               SET 
                 `like_count` = 	like_count + 1,
                 `difference_like` = difference_like + 1
@@ -80,25 +96,23 @@ class VideoRepository
                 `id` = :id
             ";
         $stmt = $this->PDO->prepare($sql);
-        $stmt->bindParam(':id', $_GET['id'],\PDO::PARAM_INT);
+        $stmt->bindParam(':id', $currentId);
         $stmt->execute();
-        return true;
     }
 
-    public function dislike()
+    public function dislike($currentId)
     {
         $sql= "UPDATE 
-                `users`
+                `video`
               SET 
-                `dislike_count` = 	dislike_count + 1,
+                `dislike_count` = dislike_count + 1,
                 `difference_like` = difference_like - 1
               WHERE 
                 `id` = :id
             ";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id', $_GET['id'],\PDO::PARAM_INT);
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $currentId);
         $stmt->execute();
-        return true;
     }
 
     public function videoLauncher($id){
@@ -107,7 +121,7 @@ class VideoRepository
             * 
             FROM users
             INNER JOIN video
-            ON users.id = video.id_file
+                ON users.id = video.id_user 
             WHERE video.id = :id";
         $stmt = $this->PDO->prepare($sql);
         $stmt->bindValue(':id', $id);

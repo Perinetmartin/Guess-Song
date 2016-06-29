@@ -27,7 +27,6 @@ class FrontControllers
         switch ($currentRoute){
             case 'home':
                 include 'Views/home.php';
-                $this->getScript();
             break;
 
             case 'top':
@@ -40,6 +39,7 @@ class FrontControllers
                     $currentId = $_GET['id'];
                     $data = $this->repositoryVideo->videoLauncher($currentId);
                     include 'Views/post.php';
+                    
                 }else{
                     include 'Views/page404.php';
                 }
@@ -48,9 +48,10 @@ class FrontControllers
             case 'shots':
                 $data = $this->repositoryVideo->selectAllVideo();
                 include 'Views/shots.php';
+                
             break;
 
-            case 'micro':
+            case 'upload':
                 // Uploader un fichier
                 // Envoyer ce fichier sur l'id_file
                 if(isset($_GET['num'])) {
@@ -62,7 +63,6 @@ class FrontControllers
                     }
                     // On passe $data en paramètre d'upload
                     $this->video->uploadAction($data);
-                    $this->getScript();
                 }
             break;
 
@@ -78,27 +78,53 @@ class FrontControllers
                 include 'Views/auth/session.php';
             break;
 
+            case 'like':
+                if(isset($_GET['id'])){
+                    $currentId = $_GET['id'];
+                }else{
+                    include 'Views/page404.php';
+                    return;
+                }
+                $this->repositoryVideo->like($currentId);
+                $id_user = $this->repositoryVideo->selectVideoById_file();
+                $this->repositoryUsers->addPoint($id_user->id_user);
+            break;
+
+            case 'dislike':
+                if(isset($_GET['id'])){
+                    $currentId = $_GET['id'];
+                }else{
+                    include 'Views/page404.php';
+                    return;
+                }
+                $this->repositoryVideo->dislike($currentId);
+                $id_user = $this->repositoryVideo->selectVideoById_file();
+                $this->repositoryUsers->removePoint($id_user->id_user);
+            break;
+
             default:
                 include 'Views/home.php';
-                $this->getScript();
+                
         }
-    }
-
-    public function getHeader(){
-        include "Views/header/header.php";
-    }
-
-    public function getScript(){
-        // On ajoute les scripts dans le footer.
-        // en fonction du paramètre que l'utilisateur a passé
-        include 'Views/footer/scripts.php';
         $this->getFoot();
     }
 
+    public function getHeader(){
+        session_start();
+        include "Views/header/header.php";
+    }
+
     public function getFoot(){
+        // On ajoute les scripts dans le footer.
+        // en fonction du paramètre que l'utilisateur a passé
+        $this->getScript();
+        include 'Views/footer/foot.php';
+    }
+
+    public function getScript(){
         // foot.php comporte :
         // </body>
         // </html>
-        include 'Views/footer/foot.php';
+        include 'Views/footer/scripts.php';
     }
 }

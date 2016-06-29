@@ -21,7 +21,7 @@ class VideoControllers
         // Cette variable correspond à $data = $this->repositoryUsers->selectId($number);
         // Dans le frontController
         if (count($_FILES) === 0) {
-            include 'Views/micro.php';
+            include 'Views/upload.php';
         } else {
             if (!empty($_FILES)) {
                 // Nom du fichier
