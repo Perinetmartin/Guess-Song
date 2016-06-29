@@ -59,4 +59,28 @@ class UsersRepository
         $stmt->bindValue(':email', $_POST['email']);
         $stmt->execute();
     }
+
+    public function addPoint($id_user){
+        $sql = "UPDATE `users`
+              SET 
+                `points` = points + 1
+              WHERE 
+                `id` = :id
+            ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $id_user);
+        $stmt->execute();
+    }
+
+    public function removePoint($id_user){
+        $sql = "UPDATE `users`
+              SET 
+                `points` = points - 1
+              WHERE 
+                `id` = :id
+            ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $id_user);
+        $stmt->execute();
+    }
 }

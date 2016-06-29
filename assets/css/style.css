@@ -1,5 +1,45 @@
-.bloc{
-    width: 500px;
-    height: 500px;
-    background: black;
+.homepage{
+    width: 100%;
+    height: 100vh;
+}
+
+.bloc_gauche{
+    width: 10%;
+    height: 100vh;
+    float: left;
+    border-right: #5073f5 solid 2px;
+}
+
+.bloc_centrage{
+    position: relative;
+    width: 80%;
+    height: 100vh;
+    float: left;
+}
+
+.bloc_droite{
+    width: 10%;
+    float: right;
+    height: 100vh;
+    border-left: #5073f5 solid 2px;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #7992f9;
+    font-family: Arial;
+    font-size: 30px;
+
+}
+
+header nav{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.container{
+    background: url('../img/bg.svg') no-repeat;
+    background-size: cover;
+    height: 100vh;
 }

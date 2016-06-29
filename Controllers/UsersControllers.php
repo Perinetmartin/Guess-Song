@@ -54,6 +54,13 @@ class UsersControllers
                 return;
             }
 
+            // Si l'email n'est pas comforme
+            else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors = 1;
+                echo "Please enter a correct email";
+                return;
+            }
+
             // Teste si le nom d'utilisateur rentré par l'utilisateur existe déjàa
             $this->AlreadyUsers();
 
@@ -88,13 +95,13 @@ class UsersControllers
 
             $data = $this->users->selectAllUsers();
             foreach ($data as $item) {
-                var_dump($item);
                 if($pseudo === $item->pseudo && password_verify($password, $item->password)){
                     echo "That's great ! You are now loged in";
 //                    session_start();
                     $_SESSION['pseudo'] = $item->pseudo;
                     $_SESSION['nom'] = $item->nom;
                     $_SESSION['prenom'] = $item->prenom;
+                    $_SESSION['id'] = $item->id;
 //                    $_SESSION['pseudo'] = $item->pseudo;
                     return;
                 }
