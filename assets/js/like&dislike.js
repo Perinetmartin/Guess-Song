@@ -8,6 +8,7 @@ $(document).ready(function() {
             },
             function (data) {
                 console.log(data);
+                location.href = 'index.php?route=top';
             },
             'text'
         );
@@ -22,10 +23,20 @@ $(document).ready(function() {
             },
             function (data) {
                 console.log(data);
+                location.href = 'index.php?route=top';
             },
             'text'
         );
     });
+
+    $('.bloc_camera').click(function (e) {
+        e.preventDefault();
+        $('.webcam').fadeIn(1000);
+    });
+
+    $('.closeWebcam').click(function () {
+        $('.webcam').fadeOut(1000);
+    })
 });
 
     $(".register").click(function (e) {
@@ -38,6 +49,8 @@ $(document).ready(function() {
         // $('.formulaireRegister').toggle(1000);
         $('.formulaireLogin').toggle(1000);
     });
+
+
 
 //
 //     $(".login").click(function (e) {

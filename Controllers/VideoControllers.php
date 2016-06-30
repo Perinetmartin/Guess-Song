@@ -31,7 +31,7 @@ class VideoControllers
                 $file_extension = strrchr($file_name, ".");
 
                 // Les extensions autorisées sont mp4 ou MP4
-                $extensions_autorisee = ['.mp4', '.MP4'];
+                $extensions_autorisee = ['.mp4', '.MP4', '.webm', '.WEBM'];
 
                 // On récupère le poid du fichier
                 $size = $_FILES['fichier']['size'];
@@ -57,7 +57,32 @@ class VideoControllers
                     echo 'Seul les fichiers mp4 sont autorisées';
                 }
             }
-            header('Location: index.php?route=monde');
+            header('Location: index.php?route=shots');
         }
+    }
+
+    public function uploadVideoWebcam(){
+        $file_tmp = $_FILES['files']['tmp_name'];
+        $file_name = $_FILES['files']['name'];
+
+        $file_tmp = $file_tmp[0];
+        $file_name = $file_name[0];
+        $file_dest = 'assets/video/' . $file_name;
+        if(!empty($_POST['nom_musique'])){
+            if (move_uploaded_file($file_tmp, $file_dest)) {
+                $this->video->insertVideoWebcam($file_name, $file_dest);
+                echo 'Great ! You have upload';
+            } else {
+                echo 'error';
+            }
+        }else{
+            echo 'Veuillez rentrer un texte';
+        }
+    }
+
+    public function guessNameVideo(){
+        $a = $_SESSION['id'];
+        $data = $this->video->selectNomMusique($a);
+        var_dump($data);
     }
 }

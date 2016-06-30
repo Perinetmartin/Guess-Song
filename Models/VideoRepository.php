@@ -13,13 +13,30 @@ class VideoRepository
     {
         $sql = "INSERT INTO
                 `video`
-                (`file`, `file_url`, `id_user`) 
+                (`file`, `file_url`, `id_user`, `nom_musique`) 
                 VALUES
-                (:file, :file_url, :id_user)";
+                (:file, :file_url, :id_user, :nom_musique)";
+        $stmt = $this->PDO->prepare($sql);
+        // Md5 pour pouvoir générer un nom afin d'avoir plusieurs fois la vidéo dans la bdd
+        $stmt->bindValue(':file', $name . md5($name));
+        $stmt->bindValue(':file_url', $fileUrl);
+        $stmt->bindValue(':id_user', $_POST['id_user']);
+        $stmt->bindValue(':nom_musique', $_POST['nom_musique']);
+        $stmt->execute();
+    }
+
+    public function insertVideoWebcam($name, $fileUrl)
+    {
+        $sql = "INSERT INTO
+                `video`
+                (`file`, `file_url`, `id_user`, `nom_musique`) 
+                VALUES
+                (:file, :file_url, :id_user, :nom_musique)";
         $stmt = $this->PDO->prepare($sql);
         $stmt->bindValue(':file', $name);
         $stmt->bindValue(':file_url', $fileUrl);
-        $stmt->bindValue(':id_user', $_POST['id_user']);
+        $stmt->bindValue(':id_user', $_SESSION['id']);
+        $stmt->bindValue(':nom_musique', $_POST['nom_musique']);
         $stmt->execute();
     }
 
@@ -27,7 +44,23 @@ class VideoRepository
         $sql = "
         SELECT 
           `id`,
-          `file`
+          `file`,
+        FROM 
+          `video` 
+        WHERE 
+          `id` = :id
+        ";
+        $stmt = $this->PDO->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchObject();
+    }
+
+    public function selectNomMusique($id){
+        $sql = "
+        SELECT 
+          `id`,
+          `nom_musique`,
         FROM 
           `video` 
         WHERE 
@@ -91,7 +124,7 @@ class VideoRepository
                 `video`
               SET 
                 `like_count` = 	like_count + 1,
-                `difference_like` = difference_like + 1
+                `difference_like` = difference_like + 1 
               WHERE 
                 `id` = :id
             ";

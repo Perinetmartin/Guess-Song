@@ -59,6 +59,7 @@ class FrontControllers
             break;
 
             case 'upload':
+                $this->getHeader();
                 // Uploader un fichier
                 // Envoyer ce fichier sur l'id_file
                 if(isset($_GET['num'])) {
@@ -71,6 +72,7 @@ class FrontControllers
                     // On passe $data en paramètre d'upload
                     $this->video->uploadAction($data);
                 }
+                $this->getFoot();
             break;
 
             case 'register':
@@ -109,14 +111,26 @@ class FrontControllers
                 $this->repositoryUsers->removePoint($id_user->id_user);
             break;
 
+            case 'uploadWebcam':
+                $this->video->uploadVideoWebcam();
+            break;
+
+            case 'guess':
+                $this->video->guessNameVideo();
+            break;
+
             default:
-                include 'Views/home.php';
-                
+                include 'Views/page404.php';
         }
     }
 
     public function getHeader(){
         include "Views/header/header.php";
+        if(isset($_GET['route'])){
+            if($_GET['route'] == 'upload'){
+                include 'Views/header/cssWebcam.php';
+            }
+        }
     }
 
     public function getFoot(){
@@ -131,5 +145,10 @@ class FrontControllers
         // </body>
         // </html>
         include 'Views/footer/scripts.php';
+        if(isset($_GET['route'])) {
+            if ($_GET['route'] == 'upload') {
+                include 'Views/footer/scriptWebcam.php';
+            }
+        }
     }
 }

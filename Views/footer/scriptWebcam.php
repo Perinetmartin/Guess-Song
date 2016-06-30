@@ -1,0 +1,12 @@
+<script src="node_modules/videojs-record/node_modules/video.js/dist/video.min.js"></script>
+<script src="//cdn.webrtc-experiment.com/RecordRTC.js"></script>
+<script src="node_modules/videojs-record/node_modules/wavesurfer.js/dist/wavesurfer.min.js"></script>
+<script src="node_modules/videojs-record/node_modules/wavesurfer.js/dist/plugin/wavesurfer.microphone.min.js"></script>
+<script src="node_modules/videojs-record/node_modules/videojs-wavesurfer/videojs.wavesurfer.js"></script>
+<script src="node_modules/videojs-record/src/js/videojs.record.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="node_modules/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="node_modules/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="node_modules/fine-uploader/fine-uploader/fine-uploader.js"></script>
+<script src="assets/js/scriptWebcam.js"></script>

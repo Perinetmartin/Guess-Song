@@ -1,3 +1,5 @@
+</head>
+<body>
 <div class="bloc_gauche">
     <?php
     if(empty($_SESSION)) {
