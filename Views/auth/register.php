@@ -1,29 +1,41 @@
-<form method="post" action="">
-<!--    nom-->
-    <label for="nom">First Name</label>
-    <input id="nom" type="text" pattern="[a-zA-Z0-9]{2,64}" name="nom" required /><br/>
+<div class="formulaire formulaireRegister">
+    <form method="post" action="">
+    <!--    nom-->
+        <div class="blocInput">
+            <label for="nom">First Name</label>
+            <input id="nom" type="text" class="champtext" pattern="[a-zA-Z0-9]{2,64}" name="nom" required />
+        </div>
 
-    <!--    prenom -->
-    <label for="prenom">Last Name</label>
-    <input id="prenom" type="text" pattern="[a-zA-Z0-9]{2,64}" name="prenom" required /><br/>
+        <!--    prenom -->
+        <div class="blocInput">
+            <label for="prenom">Last Name</label>
+            <input id="prenom" type="text" class="champtext" pattern="[a-zA-Z0-9]{2,64}" name="prenom" required />
+        </div>
 
-    <!--    pseudo -->
-    <label for="pseudo">Pseudo (only letters and numbers, 2 to 64 characters)</label>
-    <input id="pseudo" type="text" pattern="[a-zA-Z0-9]{2,64}" name="pseudo" required /><br/>
+        <!--    pseudo -->
+        <div class="blocInput">
+            <label for="pseudo">Pseudo</label>
+            <input id="pseudo" type="text" class="champtext" pattern="[a-zA-Z0-9]{2,64}" name="pseudo" required />
+        </div>
 
-<!--    Email-->
-    <label for="email">Email</label>
-    <input id="email" class="login_input" type="email" name="email" required /><br/>
+    <!--    Email-->
+        <div class="blocInput">
+            <label for="email">Email</label>
+            <input id="email" class="login_input champtext" type="email" name="email" required />
+        </div>
 
-<!--    pattern = 6 caractère minimun -->
-<!--    autocomplete désactive l'autocomplétion  -->
-    <label for="password">Password (min. 6 characters)</label>
-    <input id="password" type="password" name="password" pattern=".{6,}" required autocomplete="off" /><br/>
+        <div class="blocInput">
+            <label for="password">Password (min. 6 characters)</label>
+            <input id="password" type="password" class="champtext" name="password" pattern=".{6,}" required autocomplete="off" />
+        </div>
 
-<!--    Repeter le password-->
-    <label for="password_repeat">Repeat password</label>
-    <input id="password_repeat" type="password" name="password_repeat" pattern=".{6,}" required autocomplete="off" /><br/>
+    <!--    Repeter le password-->
+        <div class="blocInput">
+            <label for="password_repeat">Repeat password</label>
+            <input id="password_repeat" type="password" class="champtext" name="password_repeat" pattern=".{6,}" required autocomplete="off" />
+        </div>
 
-<!--    Soumettre le formulaire-->
-    <input type="submit" value="Register" />
-</form>
+    <!--    Soumettre le formulaire-->
+        <input type="submit" value="Register" class="btn-submit"/>
+    </form>
+</div>

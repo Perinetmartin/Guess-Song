@@ -18,7 +18,7 @@ class FrontControllers
     }
     
     public function route(){
-        $this->getHeader();
+        session_start();
         if(isset($_GET['route'])){
             $currentRoute = $_GET['route'];
         }else{
@@ -26,15 +26,20 @@ class FrontControllers
         }
         switch ($currentRoute){
             case 'home':
+                $this->getHeader();
                 include 'Views/home.php';
+                $this->getFoot();
             break;
 
             case 'top':
+                $this->getHeader();
                 $data = $this->repositoryVideo->listerVideo();
                 include "Views/top.php";
+                $this->getFoot();
             break;
 
             case 'post':
+                $this->getHeader();
                 if(isset($_GET['id'])){
                     $currentId = $_GET['id'];
                     $data = $this->repositoryVideo->videoLauncher($currentId);
@@ -43,12 +48,14 @@ class FrontControllers
                 }else{
                     include 'Views/page404.php';
                 }
+                $this->getFoot();
             break;
             
             case 'shots':
+                $this->getHeader();
                 $data = $this->repositoryVideo->selectAllVideo();
                 include 'Views/shots.php';
-                
+                $this->getFoot();
             break;
 
             case 'upload':
@@ -106,11 +113,9 @@ class FrontControllers
                 include 'Views/home.php';
                 
         }
-        $this->getFoot();
     }
 
     public function getHeader(){
-        session_start();
         include "Views/header/header.php";
     }
 

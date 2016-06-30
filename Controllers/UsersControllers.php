@@ -15,11 +15,12 @@ class UsersControllers
     }
     
     public function register(){
-        if(count($_POST) === 0){
-            include 'Views/auth/register.php';
-        }else{
+//        if(count($_POST) === 0){
+//            include 'Views/auth/register.php';
+//        }else{
             $this->test_register();
-        }
+            header('Location: index.php');
+//        }
     }
     
     private function test_register()
@@ -83,9 +84,9 @@ class UsersControllers
     }
 
     public function login(){
-        if(count($_POST) === 0) {
-            include 'Views/auth/login.php';
-        }else{
+//        if(count($_POST) === 0) {
+//            include 'Views/auth/login.php';
+//        }else{
             $pseudo = $_POST['pseudo'];
             $password = $_POST['password'];
             if(empty($pseudo) || empty($password)){
@@ -102,12 +103,11 @@ class UsersControllers
                     $_SESSION['nom'] = $item->nom;
                     $_SESSION['prenom'] = $item->prenom;
                     $_SESSION['id'] = $item->id;
-//                    $_SESSION['pseudo'] = $item->pseudo;
                     return;
                 }
-                header('Location: index.php');
+                header('Location: index.php?route=top');
             }
             echo 'The username or password are wrong';
         }
-    }
+//    }
 }
