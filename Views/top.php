@@ -7,7 +7,7 @@ include 'Views/header/nav.php';
             <?php
                 foreach ($data as $item) {
             ?>
-                <li><a href="index.php?route=post&id=<?= $item->id ?>"><video src="<?= $item->file_url ?>" width="400" muted></video></a></li>
+                <li><a href="index.php?route=post&id=<?= $item->id ?>"><video src="<?= $item->file_url ?>" width="400" height="300" muted class="video-top"></video></a></li>
             <?php
                 }
             ?>

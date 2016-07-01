@@ -14,6 +14,7 @@
 </div>
 <div class="bloc_centrage">
     <header>
+        <h1><a href="index.php"><img src="assets/img/logo.svg" alt="logo"></a></h1>
         <nav>
             <ul>
                 <?php
@@ -30,12 +31,13 @@
                     <a href="index.php?route=disconnect">Disconnect</a>
                     <a href="index.php?route=top">Top</a>
                     <a href="index.php?route=shots">shots</a>
-                    <a href="index.php?route=upload&num=<?= $_SESSION['id'] ?>">Upload</a>
+                    <a href="index.php?route=upload&num=<?= $_SESSION['id'] ?>" class="call-upload">Upload</a>
                     <?php
                 }
                 ?>
             </ul>
         </nav>
+        <img src="assets/img/menu.png" alt="menu-responsive" class="menu-responsive">
         <?php
         if(!empty($_SESSION)){
             echo '';

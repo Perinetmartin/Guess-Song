@@ -15,6 +15,7 @@
         <input type="hidden" name="id_user" value="<?= $data->id ?>">
     </form>
 </div>
+<p class="or">Or</p>
 <a href="index.php?route=webcam">
     <div class="bloc_camera">
         <p>Sing on the webcam</p>

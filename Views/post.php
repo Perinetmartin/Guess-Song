@@ -3,6 +3,8 @@
 ?>
 <div class="bloc_video_post">
     <video src="<?= $data->file_url ?>" width="1000" height="570" controls class="video-post" ></video><br/>
+    <p class="like-count">Like : <?= $data->like_count ?></p>
+    <p class="like-count">Dislike : <?= $data->dislike_count ?></p>
     <?php
         if(!empty($_SESSION)) {
     ?>
@@ -12,8 +14,7 @@
         </form>
         <div class="resultat"></div>
     <!--        Requete ajax pour incrémenter et décrémenter-->
-            <p>Like : <?= $data->like_count ?></p>
-            <p>Like : <?= $data->dislike_count ?></p>
+
             <button class="btn-like-dislike btn-like ad">Like</button>
             <button class="btn-like-dislike btn-dislike">Dislike</button>
             <input type="hidden" class="id_hidden" value="<?= $data->id ?>"/>

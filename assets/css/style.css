@@ -17,7 +17,9 @@
 }
 
 body{
-    background-image: linear-gradient( -165deg, #00e9b8, #3694fe);
+    /*background-image: linear-gradient( -165deg, #00e9b8, #3694fe);*/
+    background: #FFFFFF;
+    overflow-x: hidden;
     background-repeat: no-repeat;
 }
 
@@ -32,7 +34,8 @@ body{
     position: fixed;
     left: 0;
     top: 0;
-    border-right: #5073f5 solid 2px;
+    border-right: #5073f5 solid 5px;
+    z-index: 3;
     text-align: center;
 }
 
@@ -61,7 +64,7 @@ body{
     top: 0;
     right: 0;
     height: 100vh;
-    border-left: #5073f5 solid 2px;
+    border-left: #5073f5 solid 7px;
 
 }
 
@@ -69,14 +72,25 @@ header{
     height: 90px;
 }
 
+h1{
+    width: 70px;
+    position: relative;
+    top: 10px;
+    left: 30px;
+}
+
 header nav a {
     text-decoration: none;
-    color: #fff;
+    color: #5073f5;
     font-family: 'stellar-regular', Arial;
     font-size: 16px;
     outline: none;
     text-transform: uppercase;
     margin-right: 65px;
+}
+
+header nav a:hover{
+    opacity: 0.6;
 }
 
 header nav li{
@@ -106,6 +120,7 @@ header nav{
     height: 600px;
     border-radius: 5%;
     display: block;
+    z-index: 3;
     background-image: linear-gradient( -165deg, #00e9b8, #3694fe);
 }
 
@@ -182,18 +197,16 @@ header nav{
     margin-top: 20px;
 }
 
-/*.blocUpload{*/
-
-/*}*/
-
 .uploadSing{
     width: 340px;
     height: 250px;
     position: absolute;
+    border-radius: 15px;
+
     top: 50%;
     left: 37%;
     transform: TranslateY(-50%) TranslateX(-50%);
-    background: lightgreen;
+    background: #5174f4;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -209,10 +222,14 @@ header nav{
     width: 340px;
     height: 60px;
     z-index: 2;
+    border-radius: 15px;
+    font-family: 'stellar-regular', Arial;
+    font-size: 20px;
+    color: #5174f4;
 }
 
 .uploadSing p{
-    color: #0e608a;
+    color: #FFFFFF;
     font-size: 20px;
     /*font-weight: bold;*/
     font-family: 'stellar-regular', Arial;
@@ -235,9 +252,10 @@ header nav{
     height: 250px;
     position: absolute;
     top: 50%;
-    left: 62%;
+    left: 63%;
+    border-radius: 15px;
     transform: TranslateY(-50%) TranslateX(-50%);
-    background: lightgreen;
+    background: #5174f4;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -245,7 +263,7 @@ header nav{
 }
 
 .bloc_camera p{
-    color: #0e608a;
+    color: #FFFFFF;
     font-size: 20px;
     /*font-weight: bold;*/
     font-family: 'stellar-regular', Arial;
@@ -307,25 +325,38 @@ header nav{
     width: 300px;
     height: 30px;
     padding: 10px;
-    border: none;
+    border: #5072f5 solid 2px;
     outline: none;
 }
 
+.like-count {
+    display: inline-block;
+    margin-left: 20px;
+    font-family: 'stellar-regular', Arial;
+    font-size: 25px;
+    margin-bottom: 30px;
+    color: #5174f4;
+
+}
 .btn-submit-devine{
-    width: 100px;
+    width: 150px;
     height: 52px;
+    margin-left: 15px;
     padding: 10px;
-    background: #0e608a;
+    background: #ff3557;
     border: none;
     color: #ffffff;
+    border-radius: 10px;
     text-transform: uppercase;
     font-family: 'stellar-regular';
 }
 
 .btn-like-dislike{
-    width: 70px;
-    height: 70px;
-    background: #0e608a;
+    width: 120px;
+    height: 50px;
+    color: #ffffff;
+    border-radius: 10px;
+    background: #ff3557;
     border: none;
     margin-top: 30px;
     margin-left: 30px;
@@ -344,12 +375,26 @@ header nav{
     top: 60.1%;
     left: 37%;
     transform: TranslateY(-50%) TranslateX(-50%);
-    border: none;
     width: 340px;
     height: 60px;
     z-index: 2;
+    border: 1px solid gray;
     padding: 20px;
+    border-bottom-right-radius: 15px;
     box-sizing: border-box;
+    border-bottom-left-radius: 15px;
+}
+
+.or{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: TranslateY(-50%) TranslateX(-50%);
+    text-transform: uppercase;
+    font-size: 30px;
+    color: #5174f4;
+    font-family: 'stellar-regular';
+
 }
 
 .btn-guess-musicWebcam{
@@ -357,10 +402,241 @@ header nav{
     top: 107.1%;
     left: 50%;
     transform: TranslateY(-50%) TranslateX(-50%);
-    border: none;
     width: 340px;
     height: 60px;
     z-index: 2;
     padding: 20px;
     box-sizing: border-box;
+}
+
+/** Home-title **/
+.start-screen h2 {
+    font-size: 35px;
+    font-family: 'stellar-regular', Arial;
+}
+.start-screen {
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap column;
+    align-items: center;
+    /* min-height: 100vh;*/
+}
+.loading {
+    display: flex;
+    margin: 24px 0;
+}
+.loading__element {
+    font: normal 100 2rem/1;
+    letter-spacing: 1.5em;
+}
+[class*="el"] {
+    animation: bouncing 3s infinite ease;
+}
+
+@for $i from 1 through 9 {
+$delay: percentage($i);
+    .el#{$i} {
+        animation-delay: $delay / 1000% + s;
+    }
+}
+
+@keyframes bouncing {
+    0%, 100% {
+        transform: scale3d(1,1,1);
+    }
+    50% {
+        transform: scale3d( 0,0,1);
+    }
+}
+
+.verticaly-align {
+    position : relative;
+    top: 35%;
+    text-align: center;
+}
+
+p.home-line{
+    width: 100%;
+    border-top: 5px solid #5073f5;
+}
+
+.call-upload{
+    border: 2px solid #5174f4;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    color: #5174f4;
+    padding: 11px;
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+.menu-responsive{
+    display: none;
+}
+
+@media (max-width: 1101px) {
+    nav{
+        display: none;
+    }
+
+    .menu-responsive{
+        width: 24px;
+        display: block;
+        position: absolute;
+        right: 55px;
+        top: 41px;
+    }
+}
+
+@media (max-width: 1865px){
+    .video-top{
+        width: 400px;
+    }
+}
+
+@media (max-width: 1844px) {
+    .bloc_camera{
+        left: 67%;
+    }
+
+    .inputFile{
+        left: 33%;
+    }
+
+    .uploadSing{
+        left: 33%;
+    }
+
+    .btn-guess-music{
+        left: 33%;
+        top: 62%
+    }
+
+    .btn-submit-upload{
+        left: 33%;
+    }
+}
+
+@media (max-width: 1433px) {
+    .bloc_camera{
+        left: 77%;
+    }
+
+    .inputFile{
+        left: 23%;
+    }
+
+    .uploadSing{
+        left: 23%;
+    }
+
+    .btn-guess-music{
+        left: 23%;
+        top: 62%
+    }
+
+    .btn-submit-upload{
+        left: 23%;
+    }
+}
+
+@media (max-width: 970px) {
+    .bloc_camera{
+        left: 50%;
+        top: 75%;
+    }
+
+    .inputFile{
+        left: 50%;
+        top: 28%;
+    }
+
+    .uploadSing{
+        left: 50%;
+        top: 28%;
+    }
+
+    .or{
+        top: 56%;
+    }
+
+    .btn-guess-music{
+        left: 50%;
+        top: 40%
+    }
+
+    .btn-submit-upload{
+        left: 50%;
+        top: 49%;
+    }
+}
+
+@media (max-width: 1837px){
+    .video-top{
+        width: 389px;
+    }
+}
+
+@media (max-width: 1799px) {
+    .video-top{
+        width: 21vw;
+    }
+}
+
+@media (max-width: 1392px){
+    .video-top{
+        width: 31.3vw;
+    }
+
+@media (max-width: 1278px){
+    .video-top{
+        width: 31.3vw;
+    }
+
+    .bloc_shot li:nth-child(3){
+        clear: both;
+    }
+
+    .bloc_shot li:nth-child(5){
+        clear: both;
+    }
+
+    .bloc_shot li:nth-child(7){
+        clear: both;
+    }
+}
+
+@media (max-width: 1278px){
+    .video-top{
+        width: 30.2vw;
+    }
+}
+
+@media (max-width: 1024px){
+    .video-top{
+        width: 28.5vw;
+    }
+}
+
+@media (max-width: 967px){
+    .video-top{
+        width: 28.1vw;
+    }
+}
+
+@media (max-width: 955px){
+    .video-top{
+        width: 57.3vw;
+    }
+
+    .bloc_shot li{
+        clear: both;
+    }
+}
+
+@media (max-width: 809px){
+    .video-top{
+        width: 55.2vw;
+    }
 }
