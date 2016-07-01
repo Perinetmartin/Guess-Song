@@ -6,4 +6,4 @@
     <title>Guess Song</title>
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/png" href="assets/img/profil.png" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
